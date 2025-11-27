@@ -2,6 +2,14 @@
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, } from "recharts";
 
+/**
+ * Composant personnalisé pour dessiner un curseur semi-transparent à droite du point survolé.
+ * @param {Object} props - Props du composant
+ * @param {Array} props.points - Points survolés
+ * @param {number} props.width - Largeur totale du graphique
+ * @param {number} props.height - Hauteur totale du graphique
+ * @returns {JSX.Element|null} Composant SVG du curseur
+ */
 function RightSideCursor(props) {
     const { points, width, height} = props;
     if (!points || !points[0]) return null;
@@ -9,6 +17,7 @@ function RightSideCursor(props) {
     const x = points[0].x;
 
     return (
+        // Dessine un rectangle semi-transparent à droite du point survolé
         <g>
             <rect
                 x={x}

@@ -1,6 +1,6 @@
 "use client";
 //importer graphique Recharts
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 /**
  * Composant affichant l'activité quotidienne de l'utilisateur sous forme de graphique.
@@ -25,8 +25,8 @@ export default function DailyActivityChart({ sessions }) {
     function CustomTooltip({ payload, active }) {
         if (active && payload && payload.length) {
             return (
-                <div className="bg-[#e60000] text-white text-xs px-1 py-1">
-                    <p>{payload[0].value} kg</p>
+                <div className="bg-[#e60000] text-white text-xs px-2 py-2 text-center">
+                    <p className="mb-1">{payload[0].value} kg</p>
                     <p>{payload[1].value} kCal</p>
                 </div>
             );
@@ -36,43 +36,45 @@ export default function DailyActivityChart({ sessions }) {
 
     return (
         // Conteneur principal du graphique avec style Tailwind
-        <div className="w-full h-[330px] bg-gray-50 rounded-2xl p-7">
-            <div className="flex justify-between items-center text-sm">
-                <h2 className="font-medium">Activité quotidienne</h2>
-                <ul className="activityList flex space-x-4 gap-8 list-disc">
-                    <li>Poids (kg)</li>
-                    <li>Calories brûlées (kCal)</li>
-                </ul>
-
+        <div className="w-full h-[330px] bg-[#fbfbfb] rounded-md p-6">
+            <div className="flex justify-between items-start mb-6">
+                <h2 className="font-medium text-[15px]">Activité quotidienne</h2>
+                <div className="flex items-center gap-8 text-sm text-gray-500">
+                    <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#282D30]"></span>
+                        <span>Poids (kg)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#E60000]"></span>
+                        <span>Calories brûlées (kCal)</span>
+                    </div>
+                </div>
             </div>
 
-            {/* Composant Legend de Recharts */}
-            {/*<Legend
-                verticalAlign="top"
-                align="right"
-                payload={[
-                    { value: "Poids (kg)", type: "circle", color: "#282D30" },
-                    { value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
-                ]}
-            />*/}
-
             {/* Conteneur responsive pour que le graphique s'adapte */}
-            <ResponsiveContainer width="100%" height={230}>
+            <ResponsiveContainer width="100%" height={250}>
                 <BarChart
                     data={data}
-                    margin={{ top: 40, right: 0, left: 0, bottom: 0 }} // marge interne du graph
+                    margin={{ top: 20, right: 10, left: -25, bottom: 20 }} // marge interne du graph
+                    barGap={5}
                 >
 
                     {/* Grille horizontale uniquement (vertical=false) */}
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} yAxisId="cal"/>
+                    <CartesianGrid
+                        strokeDasharray="3 3"
+                        vertical={false}
+                        yAxisId="cal"
+                        stroke="#dedede"/>
 
                     {/* Axe des abscisses (jours) */}
                     <XAxis
                         dataKey="day"
                         tickFormatter={(d, i) => i + 1}
-                        tickLine={false} 
-                        tick={{ dy: 10 }} // décale les ticks vers la gauche
-                        fontSize={12}
+                        tickLine={false}
+                        axisLine={{ stroke: '#dedede' }}
+                        tick={{ fill: '#9B9EAC', fontSize: 14 }} // décale les ticks vers la gauche
+                        dy={10}
+                        padding={{ left: -20, right: -45 }}
                     />
 
                     {/* Axe des ordonnées pour le poids */}
@@ -82,23 +84,28 @@ export default function DailyActivityChart({ sessions }) {
                         dataKey="kilogram"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ dx: 10 }} // décale les ticks vers la droite
-                        fontSize={12}
+                        tick={{ fill: '#9B9EAC', fontSize: 14 }}
+                        dx={40}
 
                     />
                     {/* Axe des ordonnées pour les calories (caché) */}
-                    <YAxis yAxisId="cal" hide dataKey="calories"
+                    <YAxis
+                        yAxisId="cal"
+                        hide
+                        dataKey="calories"
                     />
 
                     {/* Tooltip personnalisé */}
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip
+                        content={<CustomTooltip />}
+                        cursor={{ fill: 'rgba(196, 196, 196, 0.5)' }} />
 
                     {/* Barre représentant le poids */}
                     <Bar
                         yAxisId="kg"
                         dataKey="kilogram"
                         fill="#282D30"
-                        barSize={6}
+                        barSize={7}
                         radius={[3, 3, 0, 0]}
                     />
 
@@ -107,7 +114,7 @@ export default function DailyActivityChart({ sessions }) {
                         yAxisId="cal"
                         dataKey="calories"
                         fill="#E60000"
-                        barSize={6}
+                        barSize={7}
                         radius={[3, 3, 0, 0]}
                     />
                 </BarChart>
