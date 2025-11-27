@@ -14,7 +14,7 @@ function RightSideCursor(props) {
                 x={x}
                 y={0}            // on part du y réel de la zone du chart
                 width={width - x}
-                height={height}   // et on utilise la height de cette zone
+                height={height + 50}   // et on utilise la height de cette zone
                 fill="rgba(0,0,0,0.25)"
             />
         </g>
@@ -39,9 +39,9 @@ export default function SessionDurationChart({ sessions }) {
 
     // Ajouter points fictifs aux extrémités pour que la courbe touche les bords
     const extendedData = [
-        { day: "", sessionLength: data[0]?.sessionLength ?? 0 },// point initial fictif
-        ...data,   // données réelles
-        { day: "", sessionLength: data[data.length - 1]?.sessionLength ?? 0 }, // point final fictif
+        { day: 0, sessionLength: data[0]?.sessionLength ?? 0 },// point initial fictif
+        ...data,   // données réelles 1...7
+        { day: 8, sessionLength: data[data.length - 1]?.sessionLength ?? 0 }, // point final fictif
     ];
 
     // Labels des jours de la semaine en français (abréviations)
@@ -53,18 +53,9 @@ export default function SessionDurationChart({ sessions }) {
 * @returns abréviation du jour
 */
     function formatDay(day) {
-        if (!day) return ""; // points fictifs
-        let n;
-        if (typeof day === "number") n = day;
-        else if (typeof day === "string" && /^\d+$/.test(day)) n = parseInt(day, 10);
-        else {
-            const d = new Date(day);
-            if (!isNaN(d)) {
-                const jsDay = d.getDay();
-                n = jsDay === 0 ? 7 : jsDay;
-            }
-        }
-        return dayLabels[n - 1] ?? "";
+        // on ne veut pas de label pour 0 et 8
+        if (day < 1 || day > 7) return "";
+        return dayLabels[day - 1] ?? "";
     }
 
     /**
@@ -82,15 +73,15 @@ export default function SessionDurationChart({ sessions }) {
     }
 
     return (
-        <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[270px] h-[270px] relative overflow-hidden">
-            <h2 className="text-gray-200 text-xs mb-4 mt-5 ml-4 w-[120px]">Durée moyenne des sessions</h2>
+        <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[270px] h-[270px] relative overflow-hidden text-xs">
+            <h2 className="text-white/60 text-xs mb-4 mt-5 ml-4 w-[120px] absolute top-1 left-1">Durée moyenne des sessions</h2>
 
             <div className="w-full h-[180px] mt-2">
                 {/* Conteneur responsive pour que le graphique s'adapte */}
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" className="absolute inset-0">
                     <LineChart
                         data={extendedData}
-                        margin={{ top: 0, right: -20, left: -20, bottom: 0 }} // Dépassement des bords
+                        margin={{ top: 0, right: 0, left: 0, bottom: -5 }} // Dépassement des bords
                     >
                         <defs>
                             {/* dégradé de la ligne */}
@@ -114,13 +105,17 @@ export default function SessionDurationChart({ sessions }) {
                             tickFormatter={formatDay}
                             tickLine={false}
                             axisLine={false}
-                            tick={{ fill: "#fff", fontSize: 11 }}
+                            tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 11 }}
                             interval={0}
                             padding={{ left: 0, right: 0 }}
+                            tickMargin={-20}
                         />
 
                         {/* Axe Y caché (durée des sessions) */}
-                        <YAxis dataKey="sessionLength" hide />
+                        <YAxis
+                            dataKey="sessionLength"
+                            hide
+                            domain={['dataMin -15', 'dataMax + 30']}/>
 
                         {/* Tooltip personnalisé */}
                         <Tooltip content={<CustomTooltip />}
