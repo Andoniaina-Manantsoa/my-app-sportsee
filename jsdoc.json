@@ -11,6 +11,6 @@
         "destination": "./docs",
         "recurse": true,
         "readme": "README.md",
-        "template": "./template"
+        "template": "./jsdoc-template"
     }
 }

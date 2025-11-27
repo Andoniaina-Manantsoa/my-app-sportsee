@@ -1,7 +1,7 @@
 // URL de base pour les requêtes vers l'API utilisateur
 const BASE_URL = "http://localhost:3000/user";
 
-import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE, } from "@/src/mocks/userData";
+import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE, } from "@/mocks/userData";
 
 // helpers génériques
 const findById = (list, key, userId) =>

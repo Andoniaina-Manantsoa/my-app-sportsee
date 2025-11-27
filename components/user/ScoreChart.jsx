@@ -41,7 +41,7 @@ export default function ScoreChart({ score }) {
                     outerRadius="110%"      // rayon externe = taille du conteneur
                     data={data}
                     startAngle={90}         // commence en haut
-                    endAngle={280}       
+                    endAngle={450}       
                 >
                     {/* Axe polaire pour les valeurs, ici invisible (tick=false) */}
                     <PolarAngleAxis
