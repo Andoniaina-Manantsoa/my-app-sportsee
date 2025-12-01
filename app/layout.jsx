@@ -3,6 +3,7 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import "../styles/globals.css";
 
+//fonction de layout englobant l'application avec header et sidebar
 export default function RootLayout({ children }) {
     return (
         <html lang="fr">

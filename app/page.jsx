@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 
+//fonction composant pour la page d'accueil
+/**
+ * Composant de la page d'accueil
+ */
 export default function HomePage() {
     return (
         <main className="flex flex-col justify-center items-center m-10">

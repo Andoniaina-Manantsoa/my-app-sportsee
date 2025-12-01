@@ -3,24 +3,29 @@ const BASE_URL = "http://localhost:3000/user";
 
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE, } from "@/mocks/userData";
 
-// helpers génériques
+// helpers génériques.
+//Fonction utilitaire qui fait la même opération partout :👉 chercher dans une liste l’objet correspondant à un userId.
 const findById = (list, key, userId) =>
     list.find((item) => item[key] == userId);
 
+//Retourne les infos principales de l’utilisateur, ou null si introuvable.
 function getMockUser(userId) {
     return findById(USER_MAIN_DATA, "id", userId) || null;
 }
 
+//Retourne les sessions d’activité sportives.
 function getMockUserActivity(userId) {
     return findById(USER_ACTIVITY, "userId", userId)?.sessions || [];
 }
 
+//Retourne la durée moyenne des sessions.
 function getMockUserAverageSessions(userId) {
     return (
         findById(USER_AVERAGE_SESSIONS, "userId", userId)?.sessions || []
     );
 }
 
+//Retourne les performances sportives.
 function getMockUserPerformance(userId) {
     return findById(USER_PERFORMANCE, "userId", userId)?.data || [];
 }
@@ -34,6 +39,7 @@ function getMockUserPerformance(userId) {
  * @param {string|number} userId - L'identifiant unique de l'utilisateur.
  * @returns {Promise<Object|null>} Une promesse qui résout avec les données utilisateur ou null en cas d'erreur.
  */
+
 export async function getUser(userId) {
     try {
         const res = await fetch(`${BASE_URL}/${userId}`);
@@ -50,6 +56,8 @@ export async function getUser(userId) {
         return getMockUser(userId);
     }
 }
+
+//Appelle les données de l’API pour récupérer la durée moyenne des sessions d’un utilisateur.
 
 /**
  * Récupère la durée moyenne des sessions d'un utilisateur.
@@ -80,6 +88,7 @@ export async function getUserAverageSessions(userId) {
     }
 }
 
+//Appelle les données de l’API pour récupérer l’activité quotidienne d’un utilisateur.
 /**
  * Récupère l'activité quotidienne d'un utilisateur (poids, calories).
  * @param {string|number} userId - L'identifiant unique de l'utilisateur.
@@ -101,6 +110,8 @@ export async function getUserActivity(userId) {
         return getMockUserActivity(userId);
     }
 }
+
+//Appelle les données de l’API pour récupérer les performances d’un utilisateur.
 /**
  * Récupère les performances d'un utilisateur (énergie, endurance, etc.).
  * @param {string|number} userId - L'identifiant unique de l'utilisateur.
