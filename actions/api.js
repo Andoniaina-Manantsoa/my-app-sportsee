@@ -1,3 +1,5 @@
+var isDataMocked = false;
+
 // URL de base pour les requêtes vers l'API utilisateur
 const BASE_URL = "http://localhost:3000/user";
 
@@ -41,14 +43,10 @@ function getMockUserPerformance(userId) {
  */
 
 export async function getUser(userId) {
+    if (isDataMocked) return getMockUser(userId);
+
     try {
         const res = await fetch(`${BASE_URL}/${userId}`);
-
-        if (!res.ok) {
-            console.error("Erreur fetch user", res.status, "→ fallback mock");
-            return getMockUser(userId);
-        }
-
         const json = await res.json();
         return json.data;
     } catch (error) {
@@ -65,25 +63,14 @@ export async function getUser(userId) {
  * @returns {Promise<Array<Object>>} Une promesse qui résout avec un tableau des sessions moyennes ou un tableau vide en cas d'erreur.
  */
 export async function getUserAverageSessions(userId) {
+    if (isDataMocked) return getMockUserAverageSessions(userId);
+
     try {
         const res = await fetch(`${BASE_URL}/${userId}/average-sessions`);
-
-        if (!res.ok) {
-            console.error(
-                "Erreur fetch average-sessions",
-                res.status,
-                "→ fallback mock"
-            );
-            return getMockUserAverageSessions(userId);
-        }
-
         const json = await res.json();
         return json?.data?.sessions || [];
     } catch (error) {
-        console.error(
-            "Erreur réseau average-sessions → fallback mock :",
-            error
-        );
+        console.error("Erreur réseau average-sessions → fallback mock :", error);
         return getMockUserAverageSessions(userId);
     }
 }
@@ -95,14 +82,10 @@ export async function getUserAverageSessions(userId) {
  * @returns {Promise<Array<Object>>} Une promesse qui résout avec un tableau des sessions d'activité ou un tableau vide en cas d'erreur.
  */
 export async function getUserActivity(userId) {
+    if (isDataMocked) return getMockUserActivity(userId);
+
     try {
         const res = await fetch(`${BASE_URL}/${userId}/activity`);
-
-        if (!res.ok) {
-            console.error("Erreur fetch activity", res.status, "→ fallback mock");
-            return getMockUserActivity(userId);
-        }
-
         const json = await res.json();
         return json?.data?.sessions || [];
     } catch (error) {
@@ -118,16 +101,10 @@ export async function getUserActivity(userId) {
  * @returns {Promise<Object|Array>} Une promesse qui résout avec les données de performance ou un tableau vide en cas d'erreur.
  */
 export async function getUserPerformance(userId) {
+    if (isDataMocked) return getMockUserPerformance(userId);
+
     try {
-        const res = await fetch(`${BASE_URL}/${userId}/performance`, {
-            cache: "no-store",
-        });
-
-        if (!res.ok) {
-            console.error("Erreur fetch performance", res.status, "→ fallback mock");
-            return getMockUserPerformance(userId);
-        }
-
+        const res = await fetch(`${BASE_URL}/${userId}/performance`, { cache: "no-store" });
         const json = await res.json();
         return json?.data?.data || [];
     } catch (error) {
