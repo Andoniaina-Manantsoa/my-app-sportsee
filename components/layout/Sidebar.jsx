@@ -13,8 +13,8 @@ import { LuDumbbell } from "react-icons/lu";
  */
 export default function Sidebar() {
     return (
-        <aside className="w-20 h-250 flex flex-col content-center items-center bg-black">
-            <nav className="flex flex-col gap-6 pt-70">
+        <aside className="w-20 flex flex-col content-center items-center bg-black">
+            <nav className="flex flex-col gap-6 pt-45">
                 <button className="bg-white cursor-pointer rounded-md p-3">
                     <GrYoga className="size-8 stroke-red-600" />
                 </button>
@@ -32,7 +32,7 @@ export default function Sidebar() {
                 </button>
 
             </nav>
-            <p className=" text-white rotate-270 mt-60 text-xs w-[180px]" >Copiryght, SportSee 2025</p>
+            <p className=" text-white rotate-270 mt-45 text-xs w-[180px]" >Copiryght, SportSee 2025</p>
         </aside>
     );
 }
