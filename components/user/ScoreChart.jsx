@@ -29,7 +29,7 @@ export default function ScoreChart({ score }) {
 
     return (
         // Conteneur principal du graphique avec style Tailwind
-        <div className="bg-gray-50 rounded-2xl w-[270px] h-[270px] aspect-square mx-auto relative p-4">
+        <div className="bg-gray-50 rounded-lg aspect-square mx-auto w-[260px] h-[260px] relative p-4 text-xs">
             <h2 className="text-sm font-medium mb-2">Score</h2>
 
             {/* Conteneur responsive qui ajuste le graphique à la taille du parent */}
@@ -41,7 +41,7 @@ export default function ScoreChart({ score }) {
                     outerRadius="110%"      // rayon externe = taille du conteneur
                     data={data}
                     startAngle={90}         // commence en haut
-                    endAngle={450}       
+                    endAngle={450}        // fait un tour complet
                 >
                     {/* Axe polaire pour les valeurs, ici invisible (tick=false) */}
                     <PolarAngleAxis
@@ -70,9 +70,9 @@ export default function ScoreChart({ score }) {
 
             {/* Disque blanc central */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="bg-white rounded-full w-[50%] h-[50%] flex flex-col items-center justify-center">
-                    <p className="text-2xl font-bold">{normalizedScore}%</p>
-                    <p className="text-xs md:text-sm text-gray-500 mt-1 font-semibold">
+                <div className="bg-white rounded-full w-[52%] h-[52%] lg:w-[48%] lg:h-[48%] flex flex-col items-center justify-center">
+                    <p className="text-xl font-bold">{normalizedScore}%</p>
+                    <p className="text-xs md:text-xs text-gray-500 font-semibold">
                         de votre<br />objectif
                     </p>
                 </div>

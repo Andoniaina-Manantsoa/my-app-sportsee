@@ -36,7 +36,7 @@ export default function DailyActivityChart({ sessions }) {
 
     return (
         // Conteneur principal du graphique avec style Tailwind
-        <div className="w-full h-[330px] bg-[#fbfbfb] rounded-md p-6">
+        <div className="w-full h-[330px] bg-[#fbfbfb] rounded-md p-0">
             <div className="flex justify-between items-start mb-6">
                 <h2 className="font-medium text-[15px]">Activité quotidienne</h2>
                 <div className="flex items-center gap-8 text-sm text-gray-500">
@@ -55,7 +55,7 @@ export default function DailyActivityChart({ sessions }) {
             <ResponsiveContainer width="100%" height={250}>
                 <BarChart
                     data={data}
-                    margin={{ top: 20, right: 10, left: -25, bottom: 20 }} // marge interne du graph
+                    margin={{ top: 20, right: 15, left: 0, bottom: 20 }} // marge interne du graph
                     barGap={5}
                 >
 

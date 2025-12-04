@@ -82,7 +82,7 @@ export default function SessionDurationChart({ sessions }) {
     }
 
     return (
-        <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[270px] h-[270px] relative overflow-hidden text-xs">
+        <div className="bg-[#FF0000] bg-opacity-80 rounded-lg aspect-square relative overflow-hidden text-xs w-[250px] h-[250px] mx-auto">
             <h2 className="text-white/60 text-xs mb-4 mt-5 ml-4 w-[120px] absolute top-1 left-1">Durée moyenne des sessions</h2>
 
             <div className="w-full h-[180px] mt-2">

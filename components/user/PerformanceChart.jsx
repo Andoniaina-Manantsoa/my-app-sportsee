@@ -33,7 +33,7 @@ export default function PerformanceChart({ data }) {
 
     return (
         // Conteneur principal avec fond gris foncé et coins arrondis
-        <div className="bg-[#282D30] rounded-2xl p-4 w-[270px] h-[270px] mx-auto">
+        <div className="bg-[#282D30] rounded-lg aspect-square w-[250px] h-[250px] p-4 mx-auto text-xs">
 
             {/* Conteneur responsive pour adapter le graphique à la taille du parent */}
             <ResponsiveContainer width="100%" height="100%">

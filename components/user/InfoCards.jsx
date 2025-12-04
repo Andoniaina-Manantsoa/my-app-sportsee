@@ -8,11 +8,11 @@ import { FaAppleWhole, FaBurger } from "react-icons/fa6";
 function InfoCard({ icon, label, value, unit, bgIcon }) {
     return (
         // Conteneur principal de la carte
-        <div className="flex items-center bg-gray-50 p-8 w-64 h-30 shadow-sm">
+        <div className="flex items-center bg-gray-50 p-8 w-60 h-27 shadow-sm">
             <div className={`flex items-center justify-center rounded-lg w-12 h-12 mr-4 ${bgIcon}`}>
                 {icon}
             </div>
-            <div className="flex flex-col  font-bold">
+            <div className="flex flex-col font-bold">
                 <p className="text-lg">
                     {value}
                     {unit && <span className="text-m ml-1">{unit}</span>}

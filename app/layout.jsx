@@ -7,11 +7,15 @@ import "../styles/globals.css";
 export default function RootLayout({ children }) {
     return (
         <html lang="fr">
-            <body>
+            <body className="bg-[#FBFBFB]">
                 <Header />
                 <div className="flex">
                     <Sidebar />
-                    <main className="p-20">{children}</main>
+
+                    {/* Wrapper principal EXACT maquette → centré, largeur contrôlée */}
+                    <main className="flex-1 px-10 pt-10 max-w-[1200px] mx-auto">
+                        {children}
+                    </main>
                 </div>
             </body>
         </html>

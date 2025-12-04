@@ -43,38 +43,34 @@ export default async function DashboardPage({ params }) {
     const userScore = userData.todayScore ?? userData.score ?? 0;
 
     return (
-        <main className=" ml-7 mt-2 max-w-6xl mx-auto">
+        <main className="mt-2 max-w-6xl ">
             {/* Header : Bonjour {Prénom} */}
-            <h1 className="text-5xl font-semibold pb-6">
+            <h1 className="text-5xl font-semibold pb-6 max-lg:text-3xl">
                 Bonjour <span className="text-red-600">
                     {userData.userInfos?.firstName || "Sportif"}
                 </span>
 
             </h1>
-            <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+            <p className="max-lg:text-sm">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 
             {/* Layout 2 colonnes : graphes + cards info */}
-            <section className="mt-20 flex">
+            <section className="grid grid-cols-[2fr_0.8fr] gap-8 lg:mt-10 max-lg:grid-cols-1">
                 {/* Colonne gauche : graphiques */}
-                <div className="flex-1 flex flex-col">
-                    {/* Graphique activité quotidienne */}
+                {/* COLONNE GAUCHE */}
+                <div>
+                    {/* DailyActivity GRAND */}
                     <DailyActivityChart sessions={activitySessions} />
 
-                    <div className="flex flex-wrap gap-5 mt-8">
-
-                        {/* Graphique durée des sessions */}
+                    {/* Grille des 3 petits charts */}
+                    <div className="grid grid-cols-3 gap-6 max-xl:grid-cols-2 max-lg:grid-cols-1">
                         <SessionDurationChart sessions={sessions} />
-
-                        {/* Graphique performance */}
                         <PerformanceChart data={performanceData} />
-
-                        {/* Graphique score */}
                         <ScoreChart score={userScore} />
                     </div>
                 </div>
 
                 {/* Colonne droite : cards */}
-                <aside>
+                <aside className="flex flex-col gap-6">
                     <InfoCards keyData={userData.keyData} />
                 </aside>
             </section>

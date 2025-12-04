@@ -11,11 +11,11 @@ import Link from "next/link";
  */
 export default function Header() {
     return (
-        <header className="flex bg-black p-4 justify-between content-center h-20">
+        <header className="bg-black h-20 flex items-center justify-between px-10">
             <div className="header__logo">
                 <Image src="/logo.png" alt="SportSee" width={160} height={40} />
             </div>
-            <nav className="flex text-white gap-60 pt-3 pr-20 text-xl">
+            <nav className="text-white flex gap-25 text-xl">
                 <Link href="/">Accueil</Link>
                 <Link href="#">Profil</Link>
                 <Link href="#">Réglage</Link>
