@@ -53,7 +53,6 @@ export default function SessionDurationChart({ sessions }) {
         { day: 8, sessionLength: data[data.length - 1]?.sessionLength ?? 0 }, // point final fictif
     ];
 
-    // Labels des jours de la semaine en français (abréviations)
     const dayLabels = ["L", "M", "M", "J", "V", "S", "D"];
 
     /**

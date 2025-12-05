@@ -52,10 +52,10 @@ export default function DailyActivityChart({ sessions }) {
             </div>
 
             {/* Conteneur responsive pour que le graphique s'adapte */}
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                     data={data}
-                    margin={{ top: 20, right: 15, left: 0, bottom: 20 }} // marge interne du graph
+                    margin={{ top: 20, right: 15, left: 0, bottom: 100 }} // marge interne du graph
                     barGap={5}
                 >
 

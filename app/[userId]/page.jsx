@@ -21,7 +21,7 @@ import { getUser, getUserAverageSessions, getUserActivity, getUserPerformance } 
  * <DashboardPage params={{ userId: 12 }} />
  */
 export default async function DashboardPage({ params }) {
-    const { userId } = await params;   
+    const { userId } = await params;;   
 
     /// Récupération des données utilisateur
     const userData = await getUser(userId);
@@ -40,17 +40,17 @@ export default async function DashboardPage({ params }) {
     }
 
     // Score utilisateur (todayScore ou score par défaut)
-    const userScore = userData.todayScore ?? userData.score ?? 0;
+    //const userScore = userData.todayScore ?? userData.score ?? 0;
 
     return (
         <main className="mt-2 max-w-6xl ">
-            {/* Header : Bonjour {Prénom} */}
+            {/* Header */}
             <h1 className="text-5xl font-semibold pb-6 max-lg:text-3xl">
                 Bonjour <span className="text-red-600">
-                    {userData.userInfos?.firstName || "Sportif"}
+                    {userData.firstName || "Sportif"}
                 </span>
-
             </h1>
+            
             <p className="max-lg:text-sm">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 
             {/* Layout 2 colonnes : graphes + cards info */}
@@ -65,7 +65,7 @@ export default async function DashboardPage({ params }) {
                     <div className="grid grid-cols-3 gap-6 max-xl:grid-cols-2 max-lg:grid-cols-1">
                         <SessionDurationChart sessions={sessions} />
                         <PerformanceChart data={performanceData} />
-                        <ScoreChart score={userScore} />
+                        <ScoreChart score={userData.score} />
                     </div>
                 </div>
 

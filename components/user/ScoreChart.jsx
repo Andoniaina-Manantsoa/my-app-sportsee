@@ -29,7 +29,7 @@ export default function ScoreChart({ score }) {
 
     return (
         // Conteneur principal du graphique avec style Tailwind
-        <div className="bg-gray-50 rounded-lg aspect-square mx-auto w-[260px] h-[260px] relative p-4 text-xs">
+        <div className="bg-gray-100 rounded-lg aspect-square mx-auto w-[250px] h-[250px] relative p-4 text-xs">
             <h2 className="text-sm font-medium mb-2">Score</h2>
 
             {/* Conteneur responsive qui ajuste le graphique à la taille du parent */}
